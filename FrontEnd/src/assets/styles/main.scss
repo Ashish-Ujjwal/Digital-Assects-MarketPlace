@@ -1,0 +1,56 @@
+// main.scss - Digital Asset Marketplace
+// Main entry point for all styles
+
+// Import variables and mixins first
+@use 'variables' as *;
+@use 'mixins' as *;
+
+// Base styles
+@use 'base/reset';
+@use 'base/typography';
+@use 'base/utilities';
+@use 'base/animations';
+
+// Layout components
+@use 'components/layout/header';
+@use 'components/layout/footer';
+@use 'components/layout/navigation';
+
+// Common components
+@use 'components/common/button';
+@use 'components/common/input';
+@use 'components/common/spinner';
+@use 'components/common/modal';
+@use 'components/common/toast';
+
+// Product components
+@use 'components/products/product-card';
+@use 'components/products/product-grid';
+@use 'components/products/product-details';
+@use 'components/products/filter-sidebar';
+
+//auth related
+@use 'pages/auth';
+@use 'components/forms/authForm';
+@use 'components/forms/formInput';
+@use 'components/routes/routesComponent';
+@use 'pages/forgotPassword';
+@use 'context/authContext';
+
+// Cart components
+@use 'components/cart/cart-item';
+@use 'components/cart/cart-summary';
+
+// Search components
+@use 'components/search/search-bar';
+
+// Page-specific styles
+@use 'pages/home';
+@use 'pages/product-list';
+@use 'pages/product-detail';
+@use 'pages/cart';
+@use 'pages/checkout';
+@use 'pages/categories';
+@use 'pages/account';
+@use 'pages/legal';
+@use 'pages/notfound'

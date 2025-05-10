@@ -1,0 +1,389 @@
+// components/products/_filter-sidebar.scss
+@use '../../variables' as *;
+@use '../../mixins' as *;
+
+.filter-sidebar {
+  @include card;
+  position: sticky;
+  top: $space-4;
+  height: fit-content;
+  box-shadow: $shadow-md;
+  border: 1px solid $neutral-200;
+  transition: all $transition-normal;
+  
+  &:hover {
+    transform: none; // Override the transform from the card mixin
+  }
+  
+  &__mobile-toggle {
+    display: none;
+    align-items: center;
+    gap: $space-2;
+    padding: $space-2 $space-3;
+    background-color: white;
+    border: 1px solid $neutral-200;
+    border-radius: $radius-md;
+    font-weight: $font-weight-medium;
+    cursor: pointer;
+    margin-bottom: $space-4;
+    position: relative;
+    
+    span {
+      font-size: $font-size-sm;
+    }
+    
+    @include respond-to(md) {
+      display: none;
+    }
+  }
+  
+  &__active-indicator {
+    position: absolute;
+    top: -4px;
+    right: -4px;
+    width: 8px;
+    height: 8px;
+    background-color: $primary-600;
+    border-radius: $radius-full;
+  }
+  
+  &__overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba($neutral-900, 0.5);
+    z-index: $z-30;
+    animation: fadeIn $transition-normal ease-out;
+  }
+  
+  &__header {
+    padding: $space-3 $space-4;
+    border-bottom: 1px solid $neutral-200;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: $neutral-50;
+    border-top-left-radius: $radius-lg;
+    border-top-right-radius: $radius-lg;
+    
+    &-title {
+      font-weight: $font-weight-semibold;
+      font-size: $font-size-lg;
+      display: flex;
+      align-items: center;
+      gap: $space-2;
+      color: $neutral-800;
+    }
+    
+    &-icon {
+      color: $primary-600;
+    }
+    
+    &-clear {
+      @include small-text;
+      color: $primary-600;
+      cursor: pointer;
+      background: none;
+      border: none;
+      font-weight: $font-weight-medium;
+      padding: $space-1 $space-2;
+      border-radius: $radius-md;
+      transition: all $transition-fast;
+      
+      &:hover {
+        background-color: $primary-100;
+        text-decoration: none;
+      }
+    }
+  }
+  
+  &__close-button {
+    background: none;
+    border: none;
+    color: $neutral-500;
+    cursor: pointer;
+    padding: $space-1;
+    border-radius: $radius-full;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    &:hover {
+      background-color: $neutral-200;
+      color: $neutral-700;
+    }
+  }
+  
+  &__content {
+    padding: $space-4;
+  }
+  
+  &__section {
+    margin-bottom: $space-6;
+    
+    &:last-child {
+      margin-bottom: 0;
+    }
+    
+    &-title {
+      font-weight: $font-weight-semibold;
+      margin-bottom: $space-3;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: $neutral-800;
+      background: none;
+      border: none;
+      padding: 0;
+      width: 100%;
+      text-align: left;
+      cursor: pointer;
+      transition: color $transition-fast;
+      
+      &:hover {
+        color: $primary-600;
+      }
+    }
+    
+    &-icon {
+      color: $neutral-500;
+      transition: transform $transition-normal;
+    }
+  }
+  
+  &__checkbox-list {
+    display: grid;
+    gap: $space-2;
+    padding-left: $space-1;
+    animation: slideDown $transition-normal ease-out;
+    
+    &-item {
+      display: flex;
+      align-items: center;
+      
+      &:hover .filter-sidebar__checkbox-label {
+        color: $primary-600;
+      }
+    }
+  }
+  
+  &__checkbox-input {
+    @include visually-hidden;
+  }
+  
+  &__checkbox-label {
+    flex: 1;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    padding: $space-1 $space-2;
+    border-radius: $radius-md;
+    transition: all $transition-fast;
+    
+    &.is-active {
+      background-color: $primary-50;
+      color: $primary-600;
+    }
+    
+    &:hover {
+      background-color: $neutral-100;
+    }
+  }
+  
+  &__checkbox-icon {
+    color: $primary-600;
+    margin-right: $space-2;
+    flex-shrink: 0;
+  }
+  
+  &__checkbox-text {
+    flex: 1;
+    @include truncate;
+  }
+  
+  &__checkbox-list-item-count {
+    @include small-text;
+    color: $neutral-500;
+    background-color: $neutral-100;
+    padding: 2px $space-2;
+    border-radius: $radius-full;
+    margin-left: $space-2;
+  }
+  
+  &__radio-list {
+    display: grid;
+    gap: $space-2;
+    padding-left: $space-1;
+    animation: slideDown $transition-normal ease-out;
+  }
+  
+  &__radio-input {
+    @include visually-hidden;
+  }
+  
+  &__radio-label {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    padding: $space-2 $space-3;
+    border-radius: $radius-md;
+    transition: all $transition-fast;
+    position: relative;
+    
+    &::before {
+      content: '';
+      width: 16px;
+      height: 16px;
+      border-radius: $radius-full;
+      border: 2px solid $neutral-400;
+      margin-right: $space-2;
+      transition: all $transition-fast;
+    }
+    
+    &.is-active {
+      color: $primary-600;
+      
+      &::before {
+        border-color: $primary-600;
+      }
+      
+      &::after {
+        content: '';
+        position: absolute;
+        left: $space-3 + 0.25rem;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 8px;
+        height: 8px;
+        border-radius: $radius-full;
+        background-color: $primary-600;
+      }
+    }
+    
+    &:hover {
+      background-color: $neutral-100;
+      
+      &::before {
+        border-color: $primary-600;
+      }
+    }
+  }
+  
+  &__buttons {
+    display: flex;
+    gap: $space-3;
+    margin-top: $space-6;
+  }
+  
+  &__cancel-button {
+    @include button-outline;
+    flex: 1;
+  }
+  
+  &__apply-button {
+    @include button-primary;
+    flex: 1;
+    position: relative;
+  }
+  
+  &__apply-badge {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    width: 10px;
+    height: 10px;
+    background-color: $accent-500;
+    border-radius: $radius-full;
+    border: 2px solid white;
+  }
+  
+  // Mobile filter sidebar styles
+  @include respond-to(md) {
+    &__mobile-toggle {
+      display: none;
+    }
+  }
+  
+  @media (max-width: $breakpoint-md) {
+    display: none;
+    
+    &__mobile-toggle {
+      display: flex;
+    }
+    
+    &__overlay {
+      display: block;
+    }
+    
+    &--mobile {
+      display: block;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 85%;
+      max-width: 350px;
+      height: 100%;
+      z-index: $z-40;
+      background-color: white;
+      overflow-y: auto;
+      transform: translateX(0);
+      transition: transform $transition-normal;
+      border-radius: 0;
+      
+      &.is-open {
+        transform: translateX(0);
+        box-shadow: $shadow-xl;
+      }
+      
+      .filter-sidebar__header {
+        position: sticky;
+        top: 0;
+        background-color: white;
+        z-index: $z-10;
+        border-radius: 0;
+        padding: $space-4;
+      }
+      
+      .filter-sidebar__content {
+        padding-bottom: $space-16; // Extra padding for mobile to account for bottom buttons
+      }
+      
+      .filter-sidebar__buttons {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 85%;
+        max-width: 350px;
+        padding: $space-3 $space-4;
+        background-color: white;
+        border-top: 1px solid $neutral-200;
+        z-index: $z-10;
+        margin: 0;
+      }
+    }
+  }
+}
+
+// Animations
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}

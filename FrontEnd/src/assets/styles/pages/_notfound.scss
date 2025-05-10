@@ -1,0 +1,124 @@
+// not-found.scss
+@use '../variables' as *;
+@use '../mixins' as *;
+
+.not-found-container {
+  @include flex(column, center, center);
+  min-height: 100vh;
+  padding: $space-8;
+  background-color: $neutral-50;
+}
+
+.not-found-content {
+  @include flex(column, center, center);
+  max-width: 600px;
+  text-align: center;
+  background-color: white;
+  padding: $space-8;
+  border-radius: $radius-lg;
+  box-shadow: $shadow-lg;
+}
+
+.not-found-icon {
+  font-size: 4rem;
+  color: $warning;
+  margin-bottom: $space-4;
+}
+
+.not-found-title {
+  @include heading-1;
+  color: $primary-700;
+  margin: 0;
+  font-size: 5rem;
+  line-height: 1;
+}
+
+.not-found-subtitle {
+  @include heading-2;
+  margin-top: $space-2;
+  margin-bottom: $space-6;
+  color: $neutral-800;
+}
+
+.not-found-message {
+  @include body-text;
+  color: $neutral-600;
+  margin-bottom: $space-8;
+  max-width: 80%;
+}
+
+.not-found-actions {
+  @include flex(row, center, center, wrap);
+  gap: $space-4;
+  width: 100%;
+  
+  @include respond-to(xs) {
+    flex-direction: column;
+    width: 80%;
+  }
+}
+
+.not-found-button {
+  @include button-base;
+  padding: $space-3 $space-5;
+  min-width: 180px;
+  
+  &.home-button {
+    @include button-primary;
+  }
+  
+  &.back-button {
+    @include button-outline;
+  }
+  
+  .button-icon {
+    margin-right: $space-2;
+  }
+}
+
+// Animation for the 404 number
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+.not-found-title {
+  animation: pulse 2s infinite ease-in-out;
+}
+
+// Additional hover effects for buttons
+.not-found-button {
+  &:hover:not(:disabled) {
+    transition: all $transition-normal;
+  }
+  
+  &.home-button:hover:not(:disabled) {
+    box-shadow: $shadow-md;
+  }
+  
+  &.back-button:hover:not(:disabled) {
+    box-shadow: $shadow-sm;
+  }
+}
+
+// Responsive adjustments
+@include respond-to(md) {
+  .not-found-content {
+    padding: $space-10;
+  }
+  
+  .not-found-icon {
+    font-size: 5rem;
+  }
+  
+  .not-found-title {
+    font-size: 6rem;
+  }
+}
+
+@include respond-to(sm) {
+  .not-found-actions {
+    flex-direction: row;
+  }
+}

@@ -1,0 +1,76 @@
+// _typography.scss
+// Typography styles
+@use '../variables' as *;
+@use '../mixins' as *;
+h1 {
+    @include heading-1;
+  }
+  
+  h2 {
+    @include heading-2;
+  }
+  
+  h3 {
+    @include heading-3;
+  }
+  
+  p {
+    @include body-text;
+    margin-bottom: $space-4;
+  }
+  
+  .small-text {
+    @include small-text;
+  }
+  
+  .text-center {
+    text-align: center;
+  }
+  
+  .text-right {
+    text-align: right;
+  }
+  
+  .text-primary {
+    color: $primary-600;
+  }
+  
+  .text-accent {
+    color: $accent-600;
+  }
+  
+  .text-success {
+    color: $success;
+  }
+  
+  .text-error {
+    color: $error;
+  }
+  
+  .text-warning {
+    color: $warning;
+  }
+  
+  .text-info {
+    color: $info;
+  }
+  
+  .text-bold {
+    font-weight: $font-weight-bold;
+  }
+  
+  .text-semibold {
+    font-weight: $font-weight-semibold;
+  }
+  
+  .text-medium {
+    font-weight: $font-weight-medium;
+  }
+  
+  .text-capitalize {
+    text-transform: capitalize;
+  }
+  
+  .text-uppercase {
+    text-transform: uppercase;
+  }

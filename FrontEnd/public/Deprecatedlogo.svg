@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 100">
+  <!-- Background shape -->
+  <rect x="0" y="0" width="500" height="100" rx="10" fill="#f8f9fa" />
+  
+  <!-- Decorative elements -->
+  <circle cx="30" cy="50" r="15" fill="#4361ee" />
+  <rect x="55" y="35" width="10" height="30" fill="#3a0ca3" />
+  <rect x="75" y="25" width="10" height="50" fill="#7209b7" />
+  
+  <!-- Text with gradient -->
+  <defs>
+    <linearGradient id="text-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#4361ee" />
+      <stop offset="50%" stop-color="#3a0ca3" />
+      <stop offset="100%" stop-color="#7209b7" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Main text -->
+  <text x="100" y="45" font-family="Arial, sans-serif" font-weight="bold" font-size="24" fill="url(#text-gradient)">Digital</text>
+  <text x="100" y="70" font-family="Arial, sans-serif" font-weight="bold" font-size="24" fill="url(#text-gradient)">AssetMarketplace</text>
+  
+  <!-- Decorative circuit pattern -->
+  <path d="M460,30 L480,30 L480,40 L490,40" stroke="#4361ee" stroke-width="2" fill="none" />
+  <path d="M460,50 L470,50 L470,70 L490,70" stroke="#3a0ca3" stroke-width="2" fill="none" />
+  <path d="M460,70 L465,70 L465,60 L490,60" stroke="#7209b7" stroke-width="2" fill="none" />
+  
+  <!-- Circle decorations -->
+  <circle cx="490" cy="40" r="3" fill="#4361ee" />
+  <circle cx="490" cy="60" r="3" fill="#7209b7" />
+  <circle cx="490" cy="70" r="3" fill="#3a0ca3" />
+</svg>

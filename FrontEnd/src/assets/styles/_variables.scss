@@ -1,0 +1,134 @@
+// _variables.scss
+// Design tokens for the Digital Asset Marketplace
+
+// Color Palette
+// Primary brand colors
+$primary-100: #e3f2fd;
+$primary-200: #bbdefb;
+$primary-300: #90caf9;
+$primary-400: #64b5f6;
+$primary-500: #42a5f5; // Main primary color
+$primary-600: #2196f3;
+$primary-700: #1e88e5;
+$primary-800: #1976d2;
+$primary-900: #1565c0;
+$primary-50: lighten($primary-100, 5%);
+
+// Secondary accent colors
+$accent-100: #e8f5e9;
+$accent-200: #c8e6c9;
+$accent-300: #a5d6a7;
+$accent-400: #81c784;
+$accent-500: #66bb6a; // Main accent color
+$accent-600: #4caf50;
+$accent-700: #43a047;
+$accent-800: #388e3c;
+$accent-900: #2e7d32;
+
+// Neutral colors
+$neutral-50: #fafafa;
+$neutral-100: #f5f5f5;
+$neutral-200: #eeeeee;
+$neutral-300: #e0e0e0;
+$neutral-400: #bdbdbd;
+$neutral-500: #9e9e9e;
+$neutral-600: #757575;
+$neutral-700: #616161;
+$neutral-800: #424242;
+$neutral-900: #212121;
+
+// Alert/Feedback colors
+$success: #4caf50;
+$info: #2196f3;
+$warning: #ff9800;
+$error: #f44336;
+
+// Typography
+$font-family-primary: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+$font-family-secondary: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+$font-family-mono: 'JetBrains Mono', 'SF Mono', 'Courier New', monospace;
+
+// Font sizes
+$font-size-xs: 0.75rem;    // 12px
+$font-size-sm: 0.875rem;   // 14px
+$font-size-base: 1rem;     // 16px
+$font-size-md: 1.125rem;   // 18px
+$font-size-lg: 1.25rem;    // 20px
+$font-size-xl: 1.5rem;     // 24px
+$font-size-2xl: 1.875rem;  // 30px
+$font-size-3xl: 2.25rem;   // 36px
+$font-size-4xl: 3rem;      // 48px
+
+// Font weights
+$font-weight-light: 300;
+$font-weight-regular: 400;
+$font-weight-medium: 500;
+$font-weight-semibold: 600;
+$font-weight-bold: 700;
+
+// Line heights
+$line-height-tight: 1.25;
+$line-height-snug: 1.375;
+$line-height-normal: 1.5;
+$line-height-relaxed: 1.625;
+$line-height-loose: 2;
+
+// Spacing scale
+$space-0: 0;
+$space-1: 0.25rem;  // 4px
+$space-2: 0.5rem;   // 8px
+$space-3: 0.75rem;  // 12px
+$space-4: 1rem;     // 16px
+$space-5: 1.25rem;  // 20px
+$space-6: 1.5rem;   // 24px
+$space-8: 2rem;     // 32px
+$space-10: 2.5rem;  // 40px
+$space-12: 3rem;    // 48px
+$space-16: 4rem;    // 64px
+$space-20: 5rem;    // 80px
+$space-24: 6rem;    // 96px
+
+// Border radius
+$radius-none: 0;
+$radius-sm: 0.125rem;  // 2px
+$radius-md: 0.25rem;   // 4px
+$radius-lg: 0.5rem;    // 8px
+$radius-xl: 0.75rem;   // 12px
+$radius-2xl: 1rem;     // 16px
+$radius-full: 9999px;
+
+// Shadows
+$shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+$shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+$shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+$shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+$shadow-2xl: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+$shadow-inner: inset 0 2px 4px 0 rgba(0, 0, 0, 0.06);
+
+// Z-index
+$z-0: 0;
+$z-10: 10;
+$z-20: 20;
+$z-30: 30;
+$z-40: 40;
+$z-50: 50;
+$z-auto: auto;
+
+// Breakpoints
+$breakpoint-xs: 480px;
+$breakpoint-sm: 640px;
+$breakpoint-md: 768px;
+$breakpoint-lg: 1024px;
+$breakpoint-xl: 1280px;
+$breakpoint-2xl: 1536px;
+
+// Container widths
+$container-sm: 640px;
+$container-md: 768px;
+$container-lg: 1024px;
+$container-xl: 1280px;
+
+// Transition
+$transition-fast: 150ms;
+$transition-normal: 300ms;
+$transition-slow: 500ms;

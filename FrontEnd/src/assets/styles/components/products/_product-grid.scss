@@ -1,0 +1,343 @@
+// components/products/_product-grid.scss
+@use '../../variables' as *;
+@use '../../mixins' as *;
+
+.product-grid {
+  @include responsive-grid;
+  margin-bottom: $space-12;
+  position: relative;
+  
+  // Add a subtle animation when products load
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  
+  // Basic grid with improved spacing and animations
+  &__item {
+    animation: fadeIn 0.3s ease-in-out forwards;
+    animation-delay: calc(var(--item-index, 0) * 0.05s);
+  }
+
+  &--default {
+    .product-card{
+      width: 100%;
+    }
+
+    &__content {
+      padding: $space-4;
+    }
+  }
+  
+  // Featured variant with larger cards and more prominent display
+  &--featured {
+    grid-template-columns: repeat(1, 1fr);
+    gap: $space-4;
+    
+    @include respond-to(sm) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    
+    @include respond-to(lg) {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+  
+  // Compact variant with smaller cards for dense displays
+  &--compact {
+    grid-template-columns: repeat(2, 1fr);
+    gap: $space-3;
+    
+    @include respond-to(sm) {
+      grid-template-columns: repeat(3, 1fr);
+    }
+    
+    @include respond-to(md) {
+      grid-template-columns: repeat(4, 1fr);
+    }
+    
+    @include respond-to(lg) {
+      grid-template-columns: repeat(5, 1fr);
+    }
+    
+    @include respond-to(xl) {
+      grid-template-columns: repeat(6, 1fr);
+    }
+    
+    .product-card {
+      &__content {
+        padding: $space-3;
+      }
+      
+      &__description {
+        display: none;
+      }
+      
+      &__footer {
+        padding: $space-2 $space-3;
+      }
+      
+      &__title {
+        font-size: $font-size-base;
+        margin-bottom: $space-1;
+        line-height: $line-height-tight;
+        @include truncate;
+      }
+    }
+  }
+  
+  // List variant for mobile-friendly views
+  &--list {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: $space-4;
+    
+    .product-card {
+      display: grid;
+      grid-template-columns: 120px 1fr;
+      gap: $space-4;
+      
+      @include respond-to(md) {
+        grid-template-columns: 180px 1fr;
+      }
+      
+      &__image-container {
+        height: 100%;
+        border-radius: $radius-md;
+        overflow: hidden;
+      }
+      
+      &__content {
+        padding: $space-2 0;
+        display: flex;
+        flex-direction: column;
+      }
+      
+      &__footer {
+        padding: $space-2 0;
+        margin-top: auto;
+      }
+    }
+  }
+  
+  // Enhanced header with better spacing and responsive design
+  &__header {
+    display: flex;
+    flex-direction: column;
+    gap: $space-3;
+    margin-bottom: $space-6;
+    
+    @include respond-to(md) {
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    &-title {
+      @include heading-2;
+      margin-bottom: 0;
+      position: relative;
+      
+      &::after {
+        content: '';
+        position: absolute;
+        bottom: -$space-2;
+        left: 0;
+        width: 60px;
+        height: 3px;
+        background-color: $primary-500;
+        border-radius: $radius-full;
+        
+        @include respond-to(md) {
+          bottom: -$space-3;
+        }
+      }
+    }
+    
+    &-actions {
+      display: flex;
+      gap: $space-2;
+      flex-wrap: wrap;
+      
+      .btn-filter, .btn-sort {
+        @include button-secondary;
+        display: flex;
+        align-items: center;
+        gap: $space-1;
+        
+        svg {
+          width: 18px;
+          height: 18px;
+        }
+        
+        &:hover {
+          background-color: $primary-100;
+          color: $primary-700;
+        }
+      }
+    }
+  }
+  
+  // Improved empty and loading states
+  &__empty, &__loading {
+    text-align: center;
+    padding: $space-12;
+    background-color: $neutral-100;
+    border-radius: $radius-lg;
+    
+    h3 {
+      @include heading-3;
+      margin-bottom: $space-3;
+    }
+    
+    p {
+      color: $neutral-600;
+    }
+  }
+  
+  // Enhanced load more button
+  &__load-more {
+    display: flex;
+    justify-content: center;
+    margin-top: $space-8;
+    
+    button {
+      @include button-outline;
+      padding: $space-3 $space-8;
+      position: relative;
+      overflow: hidden;
+      
+      &::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 200%;
+        height: 100%;
+        background: linear-gradient(
+          90deg,
+          rgba(255, 255, 255, 0) 0%,
+          rgba(255, 255, 255, 0.2) 50%,
+          rgba(255, 255, 255, 0) 100%
+        );
+        transition: left 0.5s ease-in-out;
+      }
+      
+      &:hover::after {
+        left: 100%;
+      }
+      
+      &.loading {
+        position: relative;
+        color: transparent;
+        
+        &::before {
+          content: '';
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          width: 20px;
+          height: 20px;
+          margin: -10px 0 0 -10px;
+          border: 2px solid $primary-200;
+          border-top-color: $primary-600;
+          border-radius: 50%;
+          animation: spin 0.8s linear infinite;
+        }
+      }
+    }
+  }
+  
+  @keyframes spin {
+    to { transform: rotate(360deg); }
+  }
+  
+  // Skeleton loading states
+  &__skeleton {
+    @include responsive-grid;
+    
+    &-item {
+      background-color: $neutral-100;
+      border-radius: $radius-lg;
+      overflow: hidden;
+      
+      &-image {
+        @include aspect-ratio(16, 10);
+        background-color: $neutral-200;
+      }
+      
+      &-content {
+        padding: $space-4;
+        
+        div {
+          height: $space-3;
+          background-color: $neutral-200;
+          border-radius: $radius-md;
+          margin-bottom: $space-2;
+          
+          &:nth-child(1) {
+            width: 70%;
+          }
+          
+          &:nth-child(2) {
+            width: 50%;
+          }
+          
+          &:nth-child(3) {
+            width: 40%;
+          }
+        }
+      }
+    }
+  }
+  
+  // Add subtle hover effects to cards
+  .product-card {
+    transition: transform $transition-normal, box-shadow $transition-normal;
+    
+    &:hover {
+      transform: translateY(-4px);
+      box-shadow: $shadow-lg;
+    }
+  }
+}
+
+// Add responsive grid layout switching
+.product-grid-container {
+  position: relative;
+  
+  &__layout-toggle {
+    position: absolute;
+    top: 0;
+    right: 0;
+    display: flex;
+    gap: $space-1;
+    
+    button {
+      background-color: $neutral-200;
+      border: none;
+      width: 32px;
+      height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: $radius-md;
+      cursor: pointer;
+      transition: all $transition-normal;
+      
+      &.active {
+        background-color: $primary-500;
+        color: white;
+      }
+      
+      &:hover:not(.active) {
+        background-color: $neutral-300;
+      }
+      
+      svg {
+        width: 18px;
+        height: 18px;
+      }
+    }
+  }
+}

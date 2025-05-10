@@ -1,0 +1,148 @@
+// auth-form.scss
+@use '../../variables' as *;
+@use '../../mixins' as *;
+
+.auth-form {
+  .form-error {
+    background-color: rgba($error, 0.1);
+    color: $error;
+    padding: $space-3;
+    border-radius: $radius-md;
+    margin-bottom: $space-4;
+    font-size: $font-size-sm;
+  }
+
+  .form-info {
+    color: $neutral-700;
+    margin-bottom: $space-4;
+    font-size: $font-size-sm;
+    line-height: $line-height-normal;
+  }
+}
+
+.forgot-password {
+  text-align: right;
+  margin-bottom: $space-4;
+  
+  a {
+    font-size: $font-size-sm;
+    color: $primary-600;
+    text-decoration: none;
+    
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+.auth-submit-btn {
+  @include button-primary;
+  width: 100%;
+  padding: $space-3;
+  margin-top: $space-4;
+  font-size: $font-size-base;
+  
+  svg {
+    margin-right: $space-2;
+  }
+}
+
+.divider {
+  position: relative;
+  text-align: center;
+  margin: $space-6 0;
+  
+  &::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background-color: $neutral-300;
+  }
+  
+  span {
+    position: relative;
+    background-color: white;
+    padding: 0 $space-3;
+    color: $neutral-600;
+    font-size: $font-size-sm;
+  }
+}
+
+.social-login {
+  margin-top: $space-6;
+}
+
+.social-buttons {
+  @include flex(column, center, stretch);
+  gap: $space-3;
+}
+
+.social-btn {
+  @include button-outline;
+  width: 100%;
+  
+  &.google {
+    color: $neutral-900;
+    border-color: $neutral-300;
+    
+    &:hover {
+      background-color: $neutral-100;
+    }
+  }
+  
+  &.facebook {
+    color: #4267B2;
+    border-color: #4267B2;
+    
+    &:hover {
+      background-color: rgba(#4267B2, 0.1);
+    }
+  }
+}
+
+.auth-links {
+  @include flex(row, center, center);
+  margin-top: $space-6;
+  
+  .back-link {
+    color: $primary-600;
+    text-decoration: none;
+    font-size: $font-size-sm;
+    @include flex(row, center, center);
+    
+    svg {
+      margin-right: $space-2;
+    }
+    
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+.success-message {
+  text-align: center;
+  
+  h2 {
+    @include heading-3;
+    color: $success;
+    margin-bottom: $space-4;
+  }
+  
+  p {
+    color: $neutral-700;
+    margin-bottom: $space-4;
+    
+    strong {
+      font-weight: $font-weight-medium;
+    }
+  }
+  
+  .auth-submit-btn {
+    margin-top: $space-6;
+    display: inline-block;
+  }
+}

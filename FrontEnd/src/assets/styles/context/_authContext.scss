@@ -1,0 +1,146 @@
+// auth-context.scss
+@use '../variables' as *;
+@use '../mixins' as *;
+
+// Toast notifications for auth events
+.auth-toast {
+  position: fixed;
+  top: $space-4;
+  right: $space-4;
+  max-width: 400px;
+  background-color: white;
+  border-radius: $radius-md;
+  box-shadow: $shadow-lg;
+  padding: $space-3 $space-4;
+  z-index: $z-50;
+  animation: slide-in 0.3s ease-out;
+  
+  &.success {
+    border-left: 4px solid $success;
+  }
+  
+  &.error {
+    border-left: 4px solid $error;
+  }
+  
+  .toast-header {
+    @include flex(row, space-between, center);
+    margin-bottom: $space-2;
+    
+    h4 {
+      font-weight: $font-weight-medium;
+      margin: 0;
+    }
+    
+    .close-btn {
+      background: none;
+      border: none;
+      color: $neutral-600;
+      cursor: pointer;
+      
+      &:hover {
+        color: $neutral-900;
+      }
+    }
+  }
+  
+  .toast-message {
+    color: $neutral-700;
+    font-size: $font-size-sm;
+  }
+}
+
+@keyframes slide-in {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+// User menu styles (for when user is authenticated)
+.user-menu {
+  position: relative;
+  
+  .user-button {
+    @include flex(row, center, center);
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: $space-2;
+    border-radius: $radius-full;
+    
+    .user-avatar {
+      width: 32px;
+      height: 32px;
+      border-radius: $radius-full;
+      background-color: $primary-100;
+      color: $primary-800;
+      @include flex(row, center, center);
+      font-weight: $font-weight-medium;
+      margin-right: $space-2;
+    }
+    
+    .user-name {
+      font-weight: $font-weight-medium;
+    }
+    
+    .dropdown-icon {
+      margin-left: $space-2;
+      transition: transform $transition-normal;
+    }
+    
+    &.active {
+      .dropdown-icon {
+        transform: rotate(180deg);
+      }
+    }
+  }
+  
+  .dropdown-menu {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    margin-top: $space-2;
+    background-color: white;
+    border-radius: $radius-md;
+    box-shadow: $shadow-lg;
+    min-width: 200px;
+    z-index: $z-40;
+    overflow: hidden;
+    
+    .menu-item {
+      @include flex(row, flex-start, center);
+      padding: $space-3 $space-4;
+      color: $neutral-800;
+      text-decoration: none;
+      transition: background-color $transition-normal;
+      
+      svg {
+        margin-right: $space-3;
+        color: $neutral-600;
+      }
+      
+      &:hover {
+        background-color: $neutral-100;
+      }
+      
+      &.logout {
+        color: $error;
+        
+        svg {
+          color: $error;
+        }
+      }
+    }
+    
+    .divider {
+      height: 1px;
+      background-color: $neutral-200;
+      margin: $space-1 0;
+    }
+  }
+}

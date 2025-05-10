@@ -1,0 +1,226 @@
+// _footer.scss
+// Enhanced footer component styles
+@use '../../variables' as *;
+@use '../../mixins' as *;
+
+.footer {
+  background: linear-gradient(to bottom, $neutral-900, $neutral-800);
+  color: white;
+  padding: $space-12 0 $space-6;
+  
+  &__container {
+    @include container();
+  }
+  
+  &__brand {
+    display: flex;
+    align-items: center;
+    margin-bottom: $space-8;
+    
+    &-logo {
+      max-height: 40px;
+      margin-right: $space-4;
+    }
+    
+    &-text {
+      font-size: $font-size-xl;
+      font-weight: $font-weight-bold;
+    }
+  }
+
+  &__grid {
+    @include grid(1, $space-10);
+    margin-bottom: $space-10;
+    
+    @include respond-to(sm) {
+      grid-template-columns: repeat(2, 1fr);
+      gap: $space-10 $space-6;
+    }
+    
+    @include respond-to(md) {
+      grid-template-columns: repeat(4, 1fr);
+      gap: $space-10 $space-8;
+    }
+  }
+  
+  &__column {
+    &-title {
+      color: white;
+      font-weight: $font-weight-bold;
+      margin-bottom: $space-6;
+      font-size: $font-size-md;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      position: relative;
+      padding-bottom: $space-3;
+      
+      &::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 30px;
+        height: 2px;
+        background-color: $primary-500;
+      }
+    }
+  }
+  
+  &__links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    
+    li {
+      margin-bottom: $space-3;
+    }
+    
+    a {
+      color: $neutral-300;
+      text-decoration: none;
+      transition: all $transition-normal;
+      padding: $space-1 0;
+      display: inline-block;
+      position: relative;
+      
+      &::after {
+        content: '';
+        position: absolute;
+        width: 0;
+        height: 1px;
+        bottom: 0;
+        left: 0;
+        background-color: white;
+        transition: width $transition-normal;
+      }
+      
+      &:hover {
+        color: white;
+        transform: translateX(4px);
+        
+        &::after {
+          width: 100%;
+        }
+      }
+    }
+  }
+  
+  &__social {
+    display: flex;
+    gap: $space-4;
+    margin-top: $space-6;
+    
+    a {
+      color: $neutral-300;
+      background-color: rgba(255, 255, 255, 0.1);
+      height: 40px;
+      width: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all $transition-normal;
+      
+      &:hover {
+        color: white;
+        background-color: $primary-500;
+        transform: translateY(-3px);
+      }
+    }
+  }
+  
+  &__newsletter {
+    margin-top: $space-6;
+    
+    &-form {
+      display: flex;
+      margin-top: $space-3;
+      
+      input {
+        flex-grow: 1;
+        background-color: rgba(255, 255, 255, 0.1);
+        border: none;
+        border-radius: $radius-md 0 0 $radius-md;
+        padding: $space-3;
+        color: white;
+        
+        &::placeholder {
+          color: $neutral-400;
+        }
+        
+        &:focus {
+          outline: none;
+          background-color: rgba(255, 255, 255, 0.15);
+        }
+      }
+      
+      button {
+        background-color: $primary-500;
+        color: white;
+        border: none;
+        border-radius: 0 $radius-md $radius-md 0;
+        padding: $space-3 $space-5;
+        cursor: pointer;
+        font-weight: $font-weight-semibold;
+        transition: background-color $transition-normal;
+        
+        &:hover {
+          background-color: $primary-600;
+        }
+      }
+    }
+  }
+  
+  &__bottom {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding-top: $space-6;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    
+    @include respond-to(md) {
+      flex-direction: row;
+      justify-content: space-between;
+      text-align: left;
+    }
+  }
+  
+  &__copyright {
+    color: $neutral-500;
+    font-size: $font-size-sm;
+    margin-bottom: $space-4;
+    
+    @include respond-to(md) {
+      margin-bottom: 0;
+    }
+  }
+  
+  &__policy-links {
+    display: flex;
+    gap: $space-4;
+    
+    a {
+      color: $neutral-400;
+      font-size: $font-size-sm;
+      text-decoration: none;
+      transition: color $transition-normal;
+      
+      &:hover {
+        color: white;
+      }
+    }
+  }
+  
+  // Better accessibility for touch devices
+  @media (max-width: 768px) {
+    &__links a {
+      padding: $space-2 0;
+    }
+    
+    &__social a {
+      height: 48px;
+      width: 48px;
+    }
+  }
+}

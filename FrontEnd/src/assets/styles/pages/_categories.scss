@@ -1,0 +1,135 @@
+@use '../variables' as *;
+@use '../mixins' as *;
+
+.categories-page {
+  @include container($container-xl);
+  padding-top: $space-12;
+  padding-bottom: $space-16;
+}
+
+.categories-header {
+  text-align: center;
+  margin-bottom: $space-12;
+
+  h1 {
+    @include heading-1;
+    margin-bottom: $space-4;
+  }
+
+  p {
+    @include body-text;
+    color: $neutral-600;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+}
+
+.categories-grid {
+  @include grid(1, $space-6);
+  
+  @include respond-to(md) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  @include respond-to(lg) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.category-banner {
+  @include card;
+  height: 200px;
+  position: relative;
+  overflow: hidden;
+  border-radius: $radius-lg;
+  
+  &:hover {
+    .category-overlay {
+      opacity: 0.85;
+    }
+    
+    .category-button {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
+
+.category-content {
+  @include absolute-fill;
+  @include flex(row, flex-start, center);
+  padding: $space-6;
+  z-index: $z-10;
+  color: white;
+}
+
+.category-overlay {
+  @include absolute-fill;
+  z-index: $z-0;
+  opacity: 0.75;
+  transition: opacity $transition-normal;
+}
+
+.category-icon {
+  font-size: $font-size-2xl;
+  margin-right: $space-4;
+  width: 48px;
+  height: 48px;
+  @include flex(row, center, center);
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: $radius-full;
+}
+
+.category-info {
+  h2 {
+    font-size: $font-size-xl;
+    font-weight: $font-weight-bold;
+    margin-bottom: $space-1;
+  }
+  
+  p {
+    font-size: $font-size-sm;
+    max-width: 280px;
+  }
+}
+
+.category-button {
+  @include button-primary;
+  position: absolute;
+  bottom: $space-4;
+  right: $space-4;
+  z-index: $z-20;
+  opacity: 0;
+  transform: translateY($space-4);
+  transition: opacity $transition-normal, transform $transition-normal;
+}
+
+// Alternate color schemes
+.category-0 .category-overlay {
+  background: linear-gradient(135deg, $primary-700, $primary-900);
+}
+
+.category-1 .category-overlay {
+  background: linear-gradient(135deg, $accent-700, $accent-900);
+}
+
+.category-2 .category-overlay {
+  background: linear-gradient(135deg, #7e57c2, #512da8);
+}
+
+.category-3 .category-overlay {
+  background: linear-gradient(135deg, #26a69a, #00796b);
+}
+
+// Responsive adjustments
+@include respond-to(sm) {
+  .category-banner {
+    height: 220px;
+  }
+}
+
+@include respond-to(lg) {
+  .category-banner {
+    height: 240px;
+  }
+}

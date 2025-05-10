@@ -1,0 +1,195 @@
+// _header.scss
+// Enhanced header component styles
+@use '../../variables' as *;
+@use '../../mixins' as *;
+
+.header {
+  background-color: white;
+  box-shadow: $shadow-sm;
+  position: sticky;
+  top: 0;
+  z-index: $z-30;
+  transition: all 0.3s ease;
+  
+  // Scroll effect
+  &--scrolled {
+    box-shadow: $shadow-md;
+    
+    .header__container {
+      padding-top: $space-2;
+      padding-bottom: $space-2;
+    }
+    
+    .header__logo img {
+      height: 2rem;
+    }
+  }
+  
+  &__container {
+    @include container();
+    @include flex(row, space-between, center);
+    padding-top: $space-4;
+    padding-bottom: $space-4;
+    transition: all 0.3s ease;
+  }
+  
+  &__logo {
+    display: flex;
+    align-items: center;
+    
+    img {
+      height: 2.5rem;
+      width: auto;
+      transition: height 0.3s ease;
+    }
+  }
+  
+  &__search-container {
+    flex: 1;
+    max-width: 500px;
+    margin: 0 $space-6;
+    
+    @include respond-to(md) {
+      display: none;
+    }
+    
+    @include respond-to(lg) {
+      display: block;
+      max-width: 400px;
+    }
+    
+    @include respond-to(xl) {
+      max-width: 500px;
+    }
+  }
+  
+  &__actions {
+    display: flex;
+    align-items: center;
+    gap: $space-2;
+    
+    @include respond-to(sm) {
+      gap: $space-4;
+    }
+  }
+  
+  &__action-icon {
+    color: $neutral-600;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 2.5rem;
+    width: 2.5rem;
+    border-radius: $radius-full;
+    transition: all $transition-normal;
+    
+    &:hover {
+      background-color: $neutral-100;
+      color: $primary-600;
+      transform: translateY(-2px);
+    }
+    
+    &:active {
+      transform: translateY(0);
+    }
+  }
+  
+  &__search-toggle {
+    background: none;
+    border: none;
+    cursor: pointer;
+    
+    @include respond-to(md) {
+      display: none;
+    }
+  }
+  
+  &__cart-icon {
+    &:hover .header__badge {
+      transform: translate(30%, -30%) scale(1.1);
+    }
+  }
+  
+  &__badge {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background-color: $error;
+    color: white;
+    font-size: $font-size-xs;
+    font-weight: $font-weight-bold;
+    min-width: 1.25rem;
+    height: 1.25rem;
+    padding: 0 0.25rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: $radius-full;
+    transform: translate(30%, -30%);
+    transition: transform 0.2s ease;
+  }
+  
+  // Mobile search overlay
+  &__search-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba($neutral-900, 0.9);
+    z-index: $z-50;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding-top: 20vh;
+    animation: fadeIn 0.3s ease;
+    
+    &-content {
+      width: 90%;
+      max-width: 600px;
+      position: relative;
+    }
+    
+    &-close {
+      position: absolute;
+      top: -3rem;
+      right: 0;
+      background: none;
+      border: none;
+      color: white;
+      font-size: $font-size-xl;
+      cursor: pointer;
+      padding: $space-2;
+      border-radius: $radius-full;
+      
+      &:hover {
+        background-color: rgba(white, 0.1);
+      }
+    }
+  }
+  
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  
+  // Responsive adjustments
+  @include respond-to(xs) {
+    &__container {
+      padding-left: $space-2;
+      padding-right: $space-2;
+    }
+    
+    &__logo img {
+      height: 2rem;
+    }
+  }
+  
+  @include respond-to(lg) {
+    &__container {
+      padding-left: $space-4;
+      padding-right: $space-4;
+    }
+  }
+}

@@ -1,0 +1,142 @@
+// pages/_product-detail.scss
+@use '../variables' as *;
+@use '../mixins' as *;
+
+.product-detail {
+  &__container {
+    @include container($container-xl);
+    padding-top: $space-6;
+    padding-bottom: $space-16;
+  }
+
+  &__breadcrumb {
+    margin-bottom: $space-6;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: $space-1;
+    font-size: $font-size-sm;
+    color: $neutral-600;
+    
+    &-item {
+      position: relative;
+      text-decoration: none;
+      color: $neutral-600;
+      transition: color $transition-normal;
+      
+      &:hover {
+        color: $primary-600;
+      }
+      
+      &:not(:last-child) {
+        &::after {
+          content: "/";
+          margin: 0 $space-2;
+          color: $neutral-400;
+        }
+      }
+      
+      &--active {
+        font-weight: $font-weight-medium;
+        color: $primary-600;
+      }
+    }
+  }
+  
+  &__content {
+    animation: fadeIn $transition-normal ease-out;
+  }
+  
+  // Enhanced breadcrumb with hover effects
+  @include respond-to(md) {
+    &__breadcrumb {
+      font-size: $font-size-base;
+      margin-top: $space-2;
+    }
+  }
+  
+  // Page transitions
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY($space-2); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  
+  // Extra space above breadcrumb on larger screens
+  @include respond-to(lg) {
+    &__container {
+      padding-top: $space-8;
+    }
+  }
+  
+  // Dark mode support (optional)
+  body.dark-mode & {
+    &__breadcrumb {
+      color: $neutral-400;
+      
+      &-item {
+        color: $neutral-400;
+        
+        &:hover {
+          color: $primary-400;
+        }
+        
+        &--active {
+          color: $primary-400;
+        }
+        
+        &:not(:last-child) {
+          &::after {
+            color: $neutral-600;
+          }
+        }
+      }
+    }
+  }
+  
+  // Print styles for the product detail page
+  @media print {
+    &__breadcrumb {
+      display: none;
+    }
+  }
+  
+  // Add back to top button for long product pages
+  &__back-to-top {
+    position: fixed;
+    bottom: $space-6;
+    right: $space-6;
+    width: 48px;
+    height: 48px;
+    border-radius: $radius-full;
+    background-color: $primary-600;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: $shadow-lg;
+    transition: all $transition-normal;
+    opacity: 0;
+    visibility: hidden;
+    z-index: $z-40;
+    border: none;
+    
+    &--visible {
+      opacity: 1;
+      visibility: visible;
+    }
+    
+    &:hover {
+      background-color: $primary-700;
+      transform: translateY(-$space-1);
+    }
+    
+    &:active {
+      transform: translateY(0);
+    }
+  }
+  
+  // Improve scrolling behavior
+  scroll-behavior: smooth;
+  scroll-padding-top: $space-16;
+}

@@ -1,0 +1,299 @@
+// legal-page.scss
+@use '../variables' as *;
+@use '../mixins' as *;
+
+.legal-page {
+  @include container($container-lg);
+  padding-top: $space-8;
+  padding-bottom: $space-16;
+  min-height: 80vh;
+  
+  &.loading {
+    @include flex(column, center, center);
+    height: 50vh;
+    color: $neutral-600;
+    font-size: $font-size-lg;
+  }
+  
+  &.error {
+    @include flex(column, center, center);
+    height: 50vh;
+    color: $error;
+    font-size: $font-size-lg;
+  }
+}
+
+.legal-header {
+  @include flex(column, flex-start, center);
+  margin-bottom: $space-8;
+  text-align: center;
+  
+  .icon-container {
+    background-color: $primary-100;
+    color: $primary-700;
+    width: 60px;
+    height: 60px;
+    border-radius: $radius-full;
+    @include flex(row, center, center);
+    margin-bottom: $space-4;
+    
+    svg {
+      width: 24px;
+      height: 24px;
+    }
+  }
+  
+  h1 {
+    @include heading-1;
+    margin-bottom: $space-2;
+  }
+  
+  .last-updated {
+    color: $neutral-600;
+    font-size: $font-size-sm;
+  }
+}
+
+.legal-content {
+  max-width: 720px;
+  margin: 0 auto;
+  
+  @include respond-to(md) {
+    padding: $space-6;
+    background-color: white;
+    border-radius: $radius-lg;
+    box-shadow: $shadow-md;
+  }
+}
+
+.legal-section {
+  margin-bottom: $space-8;
+  
+  &:last-child {
+    margin-bottom: 0;
+  }
+  
+  h2 {
+    @include heading-3;
+    color: $neutral-800;
+    padding-bottom: $space-2;
+    border-bottom: 1px solid $neutral-200;
+    margin-bottom: $space-4;
+  }
+  
+  .section-content {
+    @include body-text;
+    color: $neutral-700;
+    
+    p {
+      margin-bottom: $space-4;
+    }
+    
+    ul, ol {
+      margin-left: $space-4;
+      margin-bottom: $space-4;
+      
+      li {
+        margin-bottom: $space-2;
+      }
+    }
+  }
+}
+
+// Navigation tabs for legal documents
+.legal-nav {
+  @include flex(row, center, center, wrap);
+  margin-bottom: $space-8;
+  gap: $space-2;
+  
+  @include respond-to(md) {
+    gap: $space-4;
+  }
+  
+  .legal-nav-item {
+    @include button-outline;
+    padding: $space-2 $space-4;
+    
+    &.active {
+      @include button-primary;
+    }
+    
+    .icon {
+      margin-right: $space-2;
+    }
+  }
+}
+
+// Print styles
+@media print {
+  .legal-page {
+    padding: 0;
+  }
+  
+  .legal-header {
+    text-align: left;
+    
+    .icon-container {
+      display: none;
+    }
+  }
+  
+  .legal-content {
+    box-shadow: none;
+    padding: 0;
+  }
+  
+  .legal-nav {
+    display: none;
+  }
+}
+// Additional styles for the enhanced legal page
+.page-actions {
+  @include flex(row, space-between, center);
+  margin-bottom: $space-6;
+  
+  .back-button, .print-button {
+    @include button-secondary;
+    
+    svg {
+      margin-right: $space-2;
+    }
+  }
+}
+
+.loading-spinner {
+  border: 4px solid $neutral-200;
+  border-top: 4px solid $primary-500;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  animation: spin 1s linear infinite;
+  margin-bottom: $space-4;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.error-icon {
+  font-size: $font-size-4xl;
+  margin-bottom: $space-4;
+}
+
+.retry-button {
+  @include button-primary;
+  margin-top: $space-4;
+}
+
+.table-of-contents {
+  background-color: $neutral-50;
+  border-radius: $radius-lg;
+  padding: $space-4;
+  margin-bottom: $space-6;
+  
+  h2 {
+    @include heading-3;
+    margin-bottom: $space-2;
+    font-size: $font-size-lg;
+    border-bottom: none;
+  }
+  
+  ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    
+    li {
+      margin-bottom: $space-2;
+      
+      a {
+        color: $primary-600;
+        text-decoration: none;
+        transition: color $transition-normal;
+        
+        &:hover {
+          color: $primary-800;
+          text-decoration: underline;
+        }
+      }
+    }
+  }
+  
+  @include respond-to(md) {
+    position: sticky;
+    top: $space-4;
+  }
+}
+
+// Add smooth scrolling for anchor links
+html {
+  scroll-behavior: smooth;
+}
+
+// Accessibility improvements
+.legal-nav-item {
+  &:focus-visible {
+    outline: 2px solid $primary-500;
+    outline-offset: 2px;
+  }
+}
+
+a:focus-visible {
+  outline: 2px solid $primary-500;
+  outline-offset: 2px;
+}
+
+/* Dark mode styles (if supported)
+@media (prefers-color-scheme: dark) {
+  .legal-page {
+    background-color: $neutral-900;
+    color: $neutral-200;
+  }
+  
+  .legal-header {
+    .icon-container {
+      background-color: $primary-900;
+      color: $primary-300;
+    }
+    
+    h1 {
+      color: $neutral-100;
+    }
+    
+    .last-updated {
+      color: $neutral-400;
+    }
+  }
+  
+  .legal-content {
+    background-color: $neutral-800;
+    
+    .legal-section {
+      h2 {
+        color: $neutral-100;
+        border-bottom-color: $neutral-700;
+      }
+      
+      .section-content {
+        color: $neutral-300;
+      }
+    }
+  }
+  
+  .table-of-contents {
+    background-color: $neutral-800;
+    
+    h2 {
+      color: $neutral-100;
+    }
+    
+    ul li a {
+      color: $primary-300;
+      
+      &:hover {
+        color: $primary-200;
+      }
+    }
+  }
+}*/

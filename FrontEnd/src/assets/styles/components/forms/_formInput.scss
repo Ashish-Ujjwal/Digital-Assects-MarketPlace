@@ -1,0 +1,68 @@
+// form-input.scss
+@use '../../variables' as *;
+@use '../../mixins' as *;
+
+.form-group {
+  margin-bottom: $space-4;
+  
+  &.has-error {
+    .input-wrapper {
+      border-color: $error;
+    }
+  }
+}
+
+.input-wrapper {
+  @include flex(row, flex-start, center);
+  border: 1px solid $neutral-300;
+  border-radius: $radius-md;
+  transition: border-color $transition-normal, box-shadow $transition-normal;
+  background-color: white;
+  
+  &:focus-within {
+    border-color: $primary-400;
+    box-shadow: 0 0 0 3px rgba($primary-400, 0.25);
+  }
+}
+
+.input-icon {
+  padding: 0 $space-3;
+  color: $neutral-500;
+  display: flex;
+}
+
+.form-input {
+  flex: 1;
+  padding: $space-3;
+  border: none;
+  background: transparent;
+  font-family: $font-family-primary;
+  font-size: $font-size-base;
+  
+  &:focus {
+    outline: none;
+  }
+  
+  &::placeholder {
+    color: $neutral-500;
+  }
+}
+
+.password-toggle {
+  background: none;
+  border: none;
+  color: $neutral-500;
+  padding: 0 $space-3;
+  cursor: pointer;
+  transition: color $transition-normal;
+  
+  &:hover {
+    color: $neutral-800;
+  }
+}
+
+.error-message {
+  color: $error;
+  font-size: $font-size-xs;
+  margin-top: $space-2;
+}

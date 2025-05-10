@@ -1,0 +1,88 @@
+// auth-page.scss
+@use '../variables' as *;
+@use '../mixins' as *;
+
+.auth-page {
+  min-height: 100vh;
+  @include flex(column, center, center);
+  background-color: $neutral-100;
+  padding: $space-4;
+}
+
+.auth-container {
+  width: 100%;
+  max-width: 480px;
+  background-color: white;
+  border-radius: $radius-lg;
+  box-shadow: $shadow-md;
+  overflow: hidden;
+  padding: $space-6;
+
+  @include respond-to(sm) {
+    padding: $space-8;
+  }
+}
+
+.auth-header {
+  margin-bottom: $space-6;
+  text-align: center;
+
+  h1 {
+    @include heading-2;
+    margin-bottom: $space-2;
+  }
+}
+
+.auth-tabs {
+  @include flex(row, center, center);
+  margin-bottom: $space-6;
+  border-bottom: 1px solid $neutral-200;
+}
+
+.auth-tab {
+  @include flex(row, center, center);
+  padding: $space-3 $space-4;
+  background: none;
+  border: none;
+  font-family: $font-family-primary;
+  font-weight: $font-weight-medium;
+  font-size: $font-size-base;
+  color: $neutral-600;
+  cursor: pointer;
+  transition: all $transition-normal;
+  border-bottom: 2px solid transparent;
+  margin: 0 $space-2;
+
+  svg {
+    margin-right: $space-2;
+  }
+
+  &.active {
+    color: $primary-600;
+    border-bottom-color: $primary-600;
+  }
+
+  &:hover:not(.active) {
+    color: $neutral-800;
+  }
+}
+
+.auth-content {
+  margin-bottom: $space-6;
+}
+
+.auth-footer {
+  text-align: center;
+  color: $neutral-600;
+  font-size: $font-size-sm;
+
+  .auth-link {
+    color: $primary-600;
+    cursor: pointer;
+    font-weight: $font-weight-medium;
+    
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}

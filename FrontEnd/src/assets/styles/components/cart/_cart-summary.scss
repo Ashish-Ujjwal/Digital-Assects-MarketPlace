@@ -1,0 +1,202 @@
+@use '../../variables' as *;
+@use '../../mixins' as *;
+
+.cart-summary {
+  @include card;
+  position: sticky;
+  top: $space-4;
+  width: 100%;
+  background-color: white;
+  border-radius: $radius-lg;
+  transition: all $transition-normal;
+  
+  @include respond-to(md) {
+    max-width: 380px;
+  }
+
+  &__header {
+    padding: $space-4;
+    border-bottom: 1px solid $neutral-200;
+    @include flex(row, space-between, center);
+  }
+
+  &__title {
+    @include heading-3;
+    margin-bottom: 0;
+    color: $neutral-900;
+  }
+  &__content {
+    padding: $space-4;
+  }
+
+  &__totals {
+    margin-bottom: $space-6;
+  }
+
+  &__row {
+    @include flex(row, space-between, center);
+    margin-bottom: $space-3;
+    
+    &:last-child {
+      margin-bottom: 0;
+    }
+
+    &--discount {
+      color: $success;
+      font-weight: $font-weight-medium;
+    }
+
+    &--total {
+      font-size: $font-size-lg;
+      font-weight: $font-weight-bold;
+    }
+  }
+
+  &__label {
+    color: $neutral-700;
+  }
+
+  &__value {
+    font-weight: $font-weight-medium;
+  }
+
+  &__total-value {
+    color: $primary-800;
+    font-weight: $font-weight-bold;
+  }
+
+  &__divider {
+    height: 1px;
+    background-color: $neutral-200;
+    margin: $space-4 0;
+  }
+
+  &__promo {
+    margin-bottom: $space-6;
+
+    &-label {
+      display: block;
+      margin-bottom: $space-2;
+      color: $neutral-800;
+      font-size: $font-size-sm;
+      font-weight: $font-weight-medium;
+    }
+
+    &-input {
+      @include flex(row, space-between, center);
+      gap: $space-2;
+
+      input {
+        @include input;
+        flex: 1;
+
+        &:disabled {
+          background-color: $neutral-100;
+        }
+      }
+    }
+
+    &-button {
+      @include button-primary;
+      min-width: 80px;
+      
+      &--loading {
+        opacity: 0.7;
+      }
+
+      &:disabled {
+        background-color: $neutral-400;
+      }
+    }
+
+    &-success {
+      margin-top: $space-2;
+      color: $success;
+      font-size: $font-size-sm;
+      font-weight: $font-weight-medium;
+    }
+  }
+
+  &__checkout {
+    @include flex(column, center, stretch);
+    gap: $space-3;
+
+    &-link {
+      width: 100%;
+      text-decoration: none;
+    }
+
+    &-button {
+      @include button-primary;
+      width: 100%;
+      padding: $space-3 $space-4;
+      font-size: $font-size-md;
+      font-weight: $font-weight-bold;
+      
+      @include respond-to(md) {
+        padding: $space-4;
+      }
+    }
+  }
+
+  &__secure-checkout {
+    @include flex(row, center, center);
+    color: $neutral-600;
+    font-size: $font-size-sm;
+    text-align: center;
+    margin-top: $space-2;
+  }
+
+  &__secure-icon {
+    margin-right: $space-1;
+  }
+
+  &__empty {
+    @include flex(column, center, center);
+    padding: $space-6 $space-4;
+    text-align: center;
+    color: $neutral-600;
+
+    p {
+      margin-bottom: $space-4;
+    }
+  }
+
+  &__continue-shopping {
+    text-decoration: none;
+    
+    button {
+      @include button-primary;
+    }
+  }
+
+  // Responsive adjustments
+  @include respond-to(lg) {
+    box-shadow: $shadow-lg;
+  }
+
+  @include respond-to(sm) {
+    &__promo-input {
+      flex-direction: row;
+    }
+  }
+
+  // Mobile optimization
+  @media (max-width: $breakpoint-sm) {
+    position: relative;
+    margin-top: $space-6;
+    box-shadow: $shadow-md;
+    
+    &__promo-input {
+      flex-direction: column;
+      
+      input {
+        width: 100%;
+      }
+      
+      button {
+        width: 100%;
+      }
+    }
+  }
+}

@@ -1,0 +1,59 @@
+// _reset.scss
+// Reset and base HTML element styles
+@use '../variables' as *;
+@use '../mixins' as *;
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: $font-family-primary;
+  line-height: $line-height-normal;
+  color: $neutral-800;
+  background-color: $neutral-50;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+img,
+picture,
+video {
+  max-width: 100%;
+  display: block;
+}
+
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+a {
+  color: $primary-600;
+  text-decoration: none;
+  transition: color $transition-normal;
+  
+  &:hover {
+    color: $primary-800;
+  }
+}
+
+ul, ol {
+  list-style: none;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: $font-family-secondary;
+  font-weight: $font-weight-bold;
+  line-height: $line-height-tight;
+}

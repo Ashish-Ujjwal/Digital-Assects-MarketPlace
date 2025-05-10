@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 120">
+  <defs>
+    <linearGradient id="logoGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#3A5CF7"/>
+      <stop offset="100%" stop-color="#E4429F"/>
+    </linearGradient>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="2" dy="2" stdDeviation="1" flood-color="#000000" flood-opacity="0.2"/>
+    </filter>
+  </defs>
+  
+  <!-- Main logo shape - stylized marketplace/platform -->
+  <g filter="url(#shadow)">
+    <!-- Base platform shape -->
+    <rect x="50" y="70" width="300" height="10" rx="5" fill="url(#logoGradient)"/>
+    
+    <!-- Digital asset cubes/blocks -->
+    <g>
+      <!-- Center cube - larger primary cube -->
+      <rect x="170" y="30" width="40" height="40" rx="4" fill="url(#logoGradient)"/>
+      
+      <!-- Left cube -->
+      <rect x="130" y="40" width="30" height="30" rx="3" fill="url(#logoGradient)" fill-opacity="0.8"/>
+      
+      <!-- Right cube -->
+      <rect x="220" y="40" width="30" height="30" rx="3" fill="url(#logoGradient)" fill-opacity="0.8"/>
+      
+      <!-- Small cube 1 -->
+      <rect x="100" y="50" width="20" height="20" rx="2" fill="url(#logoGradient)" fill-opacity="0.6"/>
+      
+      <!-- Small cube 2 -->
+      <rect x="260" y="50" width="20" height="20" rx="2" fill="url(#logoGradient)" fill-opacity="0.6"/>
+    </g>
+    
+    <!-- Connection lines between blocks representing digital network -->
+    <g stroke="url(#logoGradient)" stroke-width="2" stroke-opacity="0.8">
+      <line x1="120" y1="55" x2="130" y2="55"/>
+      <line x1="160" y1="55" x2="170" y2="50"/>
+      <line x1="210" y1="50" x2="220" y2="55"/>
+      <line x1="250" y1="55" x2="260" y2="60"/>
+    </g>
+    
+    <!-- Digital circuit patterns -->
+    <g stroke="#3A5CF7" stroke-width="1.5" stroke-opacity="0.5" fill="none">
+      <path d="M 70 65 L 90 65 L 90 55"/>
+      <path d="M 280 65 L 310 65 L 310 55"/>
+      <circle cx="90" cy="50" r="3" fill="#3A5CF7" fill-opacity="0.5"/>
+      <circle cx="310" cy="50" r="3" fill="#3A5CF7" fill-opacity="0.5"/>
+    </g>
+  </g>
+  
+  <!-- Text -->
+  <g filter="url(#shadow)">
+    <text x="200" y="100" font-family="Arial, sans-serif" font-weight="bold" font-size="16" text-anchor="middle" fill="#333333">DIGITAL ASSETS MARKETPLACE</text>
+  </g>
+</svg>

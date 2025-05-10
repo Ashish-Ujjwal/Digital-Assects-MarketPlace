@@ -1,0 +1,297 @@
+// _input.scss
+// Enhanced Input component styles
+@use '../../variables' as *;
+@use '../../mixins' as *;
+
+// Form Group
+.form-group {
+  margin-bottom: $space-4;
+  width: 100%;
+  transition: all $transition-normal;
+  
+  @include respond-to(sm) {
+    margin-bottom: $space-5;
+  }
+  
+  &--focused {
+    .form-label {
+      color: $primary-600;
+    }
+  }
+  
+  &--error {
+    .form-label {
+      color: $error;
+    }
+  }
+  
+  &--success {
+    .form-label {
+      color: $success;
+    }
+  }
+  
+  &--disabled {
+    opacity: 0.7;
+  }
+}
+
+// Form Label
+.form-label {
+  display: block;
+  margin-bottom: $space-2;
+  font-weight: $font-weight-medium;
+  color: $neutral-800;
+  transition: color $transition-normal;
+  
+  &__required {
+    color: $error;
+    margin-left: $space-1;
+  }
+}
+
+// Input Wrapper
+.input-wrapper {
+  position: relative;
+  
+  &--focused {
+    .input-group__prefix,
+    .input-group__suffix {
+      border-color: $primary-400;
+    }
+  }
+}
+
+// Form Control (Input element)
+.form-control {
+  @include input;
+  background-color: white;
+  transition: all $transition-normal;
+  
+  // Sizes
+  &--sm {
+    padding: $space-1 $space-2;
+    font-size: $font-size-sm;
+    border-radius: $radius-sm;
+  }
+  
+  &--md {
+    padding: $space-2 $space-3;
+    font-size: $font-size-base;
+  }
+  
+  &--lg {
+    padding: $space-3 $space-4;
+    font-size: $font-size-md;
+    border-radius: $radius-lg;
+  }
+  
+  // States
+  &--focused {
+    border-color: $primary-400;
+    box-shadow: 0 0 0 3px rgba($primary-400, 0.25);
+  }
+  
+  &--error {
+    border-color: $error;
+    
+    &:focus {
+      box-shadow: 0 0 0 3px rgba($error, 0.25);
+    }
+  }
+  
+  &--success {
+    border-color: $success;
+    
+    &:focus {
+      box-shadow: 0 0 0 3px rgba($success, 0.25);
+    }
+  }
+  
+  &--disabled {
+    background-color: $neutral-100;
+    cursor: not-allowed;
+    border-color: $neutral-300;
+  }
+  
+  &--with-icon {
+    padding-right: $space-8;
+  }
+  
+}
+
+// Input Group (for prefix/suffix)
+.input-group {
+  position: relative;
+  display: flex;
+  align-items: stretch;
+  width: 100%;
+  
+  .form-control {
+    position: relative;
+    flex: 1 1 auto;
+    width: 1%;
+    min-width: 0; // Ensures input doesn't overflow container
+  }
+  
+  &__prefix, 
+  &__suffix {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: $space-2 $space-3;
+    background-color: $neutral-100;
+    border: 1px solid $neutral-300;
+    color: $neutral-600;
+    font-size: $font-size-base;
+    transition: all $transition-normal;
+    
+    // Support for icons
+    svg {
+      width: 16px;
+      height: 16px;
+    }
+  }
+  
+  &__prefix {
+    border-right: none;
+    border-top-left-radius: $radius-md;
+    border-bottom-left-radius: $radius-md;
+  }
+  
+  &__suffix {
+    border-left: none;
+    border-top-right-radius: $radius-md;
+    border-bottom-right-radius: $radius-md;
+  }
+  
+  &__icon {
+    position: absolute;
+    top: 50%;
+    right: $space-3;
+    transform: translateY(-50%);
+    color: $neutral-500;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    svg {
+      width: 16px;
+      height: 16px;
+    }
+  }
+  
+  // Border radius adjustments
+  .form-control:not(:first-child) {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+  }
+  
+  .form-control:not(:last-child) {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+  
+  // Size variants support
+  .form-control--sm + &__suffix,
+  &__prefix + .form-control--sm {
+    padding: $space-1 $space-2;
+  }
+  
+  .form-control--lg + &__suffix,
+  &__prefix + .form-control--lg {
+    padding: $space-3 $space-4;
+  }
+}
+
+// Form helper text
+.form-text {
+  display: block;
+  margin-top: $space-1;
+  font-size: $font-size-sm;
+  color: $neutral-600;
+  transition: color $transition-normal;
+  
+  &--error {
+    color: $error;
+  }
+}
+
+// Character count
+.char-count {
+  position: absolute;
+  right: $space-2;
+  bottom: -$space-5;
+  font-size: $font-size-xs;
+  color: $neutral-500;
+  
+  &--limit {
+    color: $error;
+    font-weight: $font-weight-medium;
+  }
+}
+
+// Focus animation
+@keyframes focusAnimation {
+  0% {
+    box-shadow: 0 0 0 0 rgba($primary-400, 0.4);
+  }
+  70% {
+    box-shadow: 0 0 0 6px rgba($primary-400, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba($primary-400, 0);
+  }
+}
+
+.form-control:focus {
+  animation: focusAnimation 1s ease;
+}
+
+// Responsive adjustments
+@include respond-to(md) {
+  .form-group {
+    max-width: 100%;
+  }
+  
+  .form-control {
+    max-width: 100%;
+  }
+}
+
+// Touch device optimizations
+@media (hover: none) {
+  .form-control {
+    font-size: 16px; // Prevents iOS zoom on focus
+    
+    &--sm {
+      font-size: 14px;
+    }
+  }
+  
+  .form-label {
+    font-size: $font-size-md;
+  }
+}
+
+// Float label animation (optional enhancement)
+.form-group--float-label {
+  position: relative;
+  
+  .form-label {
+    position: absolute;
+    top: 0;
+    left: $space-3;
+    transform: translateY(-50%);
+    background-color: white;
+    padding: 0 $space-1;
+    font-size: $font-size-xs;
+    transition: all $transition-normal;
+    margin: 0;
+    z-index: 1;
+  }
+  
+  .form-control {
+    padding-top: $space-3;
+  }
+}

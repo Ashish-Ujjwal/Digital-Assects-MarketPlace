@@ -1,0 +1,823 @@
+@use '../variables' as *;
+@use '../mixins' as *;
+
+.ua-account-page {
+  background-color: $neutral-100;
+  min-height: 100vh;
+  padding: $space-6 0;
+  
+  @include respond-to(md) {
+    padding: $space-10 0;
+  }
+}
+
+.ua-account-container {
+  @include container($container-lg);
+  display: flex;
+  flex-direction: column;
+  gap: $space-6;
+  
+  @include respond-to(lg) {
+    flex-direction: row;
+    align-items: flex-start;
+  }
+}
+
+// Profile Section
+.ua-profile-section {
+  width: 100%;
+  background-color: white;
+  border-radius: $radius-lg;
+  box-shadow: $shadow-md;
+  overflow: hidden;
+  
+  @include respond-to(lg) {
+    width: 30%;
+    position: sticky;
+    top: $space-8;
+  }
+}
+
+.ua-profile-header {
+  padding: $space-6;
+  border-bottom: 1px solid $neutral-200;
+  @include flex(column, flex-start, center);
+  text-align: center;
+  
+  @include respond-to(md) {
+    padding: $space-8;
+  }
+}
+
+.ua-profile-avatar {
+  width: 120px;
+  height: 120px;
+  margin-bottom: $space-4;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 4px solid $primary-100;
+  
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+.ua-profile-details {
+  width: 100%;
+  
+  h1 {
+    @include heading-2;
+    margin-bottom: $space-2;
+    color: $neutral-900;
+  }
+}
+
+.ua-profile-meta {
+  @include flex(column, flex-start, flex-start);
+  gap: $space-2;
+  margin-bottom: $space-4;
+  
+  .ua-meta-item {
+    @include flex(row, flex-start, center);
+    gap: $space-2;
+    @include small-text;
+    color: $neutral-600;
+    
+    svg {
+      color: $primary-500;
+    }
+  }
+}
+
+.ua-profile-bio {
+  @include body-text;
+  color: $neutral-700;
+  margin-bottom: $space-4;
+}
+
+.ua-profile-actions {
+  @include flex(row, center, center);
+  gap: $space-3;
+  width: 100%;
+  
+  .ua-edit-profile-btn {
+    @include button-primary;
+    flex: 1;
+    max-width: 150px;
+    
+    svg {
+      margin-right: $space-2;
+    }
+  }
+  
+  .ua-logout-btn {
+    @include button-outline;
+    flex: 1;
+    max-width: 150px;
+    
+    svg {
+      margin-right: $space-2;
+    }
+  }
+}
+
+.ua-profile-stats {
+  padding: $space-4;
+  @include grid(2, $space-3);
+  
+  @include respond-to(md) {
+    padding: $space-6;
+  }
+}
+
+.ua-stat-card {
+  background-color: $neutral-50;
+  border-radius: $radius-md;
+  padding: $space-3;
+  text-align: center;
+  transition: all $transition-normal;
+  
+  &:hover {
+    background-color: $primary-50;
+    transform: translateY(-2px);
+  }
+  
+  .ua-stat-value {
+    font-size: $font-size-xl;
+    font-weight: $font-weight-bold;
+    color: $primary-700;
+    margin-bottom: $space-1;
+  }
+  
+  .ua-stat-label {
+    @include small-text;
+    color: $neutral-600;
+  }
+}
+
+// Main Account Content
+.ua-account-content {
+  width: 100%;
+  
+  @include respond-to(lg) {
+    width: 70%;
+  }
+}
+
+// Tabs
+.ua-account-tabs {
+  @include flex(row, flex-start, center);
+  gap: $space-1;
+  background-color: white;
+  border-radius: $radius-lg $radius-lg 0 0;
+  border-bottom: 1px solid $neutral-200;
+  overflow-x: auto;
+  padding: 0 $space-2;
+  margin-bottom: $space-6;
+  box-shadow: $shadow-sm;
+  
+  &::-webkit-scrollbar {
+    height: 3px;
+  }
+  
+  &::-webkit-scrollbar-track {
+    background-color: $neutral-100;
+  }
+  
+  &::-webkit-scrollbar-thumb {
+    background-color: $primary-300;
+    border-radius: $radius-full;
+  }
+  
+  @include respond-to(md) {
+    gap: $space-2;
+    padding: 0 $space-4;
+  }
+}
+
+.tab-btn {
+  @include flex(row, center, center);
+  gap: $space-2;
+  padding: $space-3 $space-2;
+  color: $neutral-600;
+  font-weight: $font-weight-medium;
+  border: none;
+  background: transparent;
+  white-space: nowrap;
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  transition: all $transition-normal;
+  
+  &:hover {
+    color: $primary-600;
+  }
+  
+  &.active {
+    color: $primary-600;
+    border-bottom: 2px solid $primary-600;
+  }
+  
+  svg {
+    font-size: $font-size-lg;
+  }
+  
+  @include respond-to(md) {
+    padding: $space-4 $space-3;
+  }
+}
+
+// Tab Content
+.ua-tab-content {
+  background-color: white;
+  border-radius: $radius-lg;
+  box-shadow: $shadow-md;
+  padding: $space-6;
+  
+  h2 {
+    @include heading-3;
+    margin-bottom: $space-6;
+    color: $neutral-800;
+    display: flex;
+    align-items: center;
+    
+    &::after {
+      content: '';
+      height: 3px;
+      flex: 1;
+      margin-left: $space-4;
+      background: linear-gradient(to right, $primary-300, transparent);
+      border-radius: $radius-full;
+    }
+  }
+}
+
+// Loading state
+.ua-loading {
+  padding: $space-10;
+  text-align: center;
+  color: $neutral-600;
+}
+
+// Empty state
+.ua-empty-state {
+  padding: $space-8 $space-4;
+  @include flex(column, center, center);
+  text-align: center;
+  
+  svg {
+    color: $neutral-400;
+    margin-bottom: $space-4;
+  }
+  
+  h3 {
+    font-size: $font-size-lg;
+    font-weight: $font-weight-semibold;
+    color: $neutral-700;
+    margin-bottom: $space-2;
+  }
+  
+  p {
+    color: $neutral-600;
+    margin-bottom: $space-6;
+  }
+  
+  button {
+    @include button-primary;
+  }
+}
+
+// Product Card Styles
+.ua-purchased-items,
+.ua-sold-items,
+.ua-favorite-items {
+  @include flex(column, flex-start, stretch);
+  gap: $space-4;
+}
+
+.ua-product-card {
+  @include flex(column, flex-start, stretch);
+  background-color: white;
+  border: 1px solid $neutral-200;
+  border-radius: $radius-lg;
+  overflow: hidden;
+  transition: all $transition-normal;
+  
+  &:hover {
+    box-shadow: $shadow-lg;
+    transform: translateY(-2px);
+    border-color: $primary-200;
+  }
+  
+  @include respond-to(md) {
+    @include flex(row, flex-start, stretch);
+  }
+}
+
+.ua-product-image {
+  width: 100%;
+  height: 180px;
+  overflow: hidden;
+  
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform $transition-normal;
+    
+    &:hover {
+      transform: scale(1.05);
+    }
+  }
+  
+  @include respond-to(md) {
+    width: 200px;
+    height: auto;
+  }
+}
+
+.ua-product-info {
+  padding: $space-4;
+  flex: 1;
+  
+  h3 {
+    font-size: $font-size-lg;
+    font-weight: $font-weight-semibold;
+    color: $neutral-800;
+    margin-bottom: $space-2;
+  }
+}
+
+.ua-purchase-meta,
+.ua-sale-meta,
+.ua-product-meta {
+  @include flex(column, flex-start, flex-start);
+  gap: $space-2;
+  margin-bottom: $space-3;
+  @include small-text;
+  color: $neutral-600;
+  
+  span {
+    @include flex(row, flex-start, center);
+    gap: $space-2;
+    
+    svg {
+      color: $primary-500;
+    }
+  }
+  
+  @include respond-to(sm) {
+    @include flex(row, flex-start, center);
+    gap: $space-4;
+  }
+}
+
+.ua-license-key {
+  background-color: $neutral-100;
+  padding: $space-2 $space-3;
+  border-radius: $radius-md;
+  margin-bottom: $space-3;
+  font-family: $font-family-mono;
+  color: $neutral-700;
+}
+
+.ua-product-actions {
+  @include flex(column, flex-start, stretch);
+  gap: $space-2;
+  
+  button {
+    @include flex(row, center, center);
+    gap: $space-2;
+    
+    &.ua-download-btn {
+      @include button-primary;
+      width: 100%;
+    }
+    
+    &.ua-support-btn {
+      @include button-secondary;
+      width: 100%;
+    }
+    
+    &.ua-details-btn {
+      @include button-primary;
+      width: 100%;
+    }
+    
+    &.ua-contact-buyer-btn,
+    &.ua-remove-favorite-btn,
+    &.ua-view-btn {
+      @include button-outline;
+      width: 100%;
+    }
+  }
+  
+  @include respond-to(sm) {
+    @include flex(row, flex-start, center);
+    
+    button {
+      flex: 1;
+    }
+  }
+}
+
+.ua-buyer-info {
+  @include flex(row, flex-start, center);
+  gap: $space-2;
+  margin-bottom: $space-3;
+  @include small-text;
+  color: $neutral-600;
+  
+  img {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+}
+
+.ua-product-author {
+  @extend .ua-buyer-info;
+}
+
+// Transactions Tab
+.ua-transactions-table-container {
+  overflow-x: auto;
+  margin-bottom: $space-4;
+}
+
+.ua-transactions-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  
+  th, td {
+    padding: $space-3 $space-2;
+    text-align: left;
+    
+    @include respond-to(md) {
+      padding: $space-3 $space-4;
+    }
+  }
+  
+  th {
+    background-color: $neutral-100;
+    color: $neutral-700;
+    font-weight: $font-weight-semibold;
+    position: sticky;
+    top: 0;
+    z-index: $z-10;
+    
+    &:first-child {
+      border-top-left-radius: $radius-md;
+    }
+    
+    &:last-child {
+      border-top-right-radius: $radius-md;
+    }
+  }
+  
+  tr {
+    border-bottom: 1px solid $neutral-200;
+    transition: background-color $transition-normal;
+    
+    &:hover {
+      background-color: $neutral-50;
+    }
+    
+    &:last-child {
+      border-bottom: none;
+    }
+  }
+  
+  .ua-transaction-sale {
+    color: $success;
+  }
+  
+  .ua-transaction-purchase {
+    color: $primary-600;
+  }
+  
+  .ua-transaction-withdrawal {
+    color: $neutral-700;
+  }
+  
+  .ua-amount-positive {
+    color: $success;
+    font-weight: $font-weight-semibold;
+  }
+  
+  .ua-amount-negative {
+    color: $neutral-800;
+  }
+  
+  .ua-status-badge {
+    @include badge;
+    text-transform: capitalize;
+    
+    &.ua-completed {
+      @include badge($accent-100, $accent-800);
+    }
+    
+    &.ua-pending {
+      @include badge($primary-100, $primary-800);
+    }
+    
+    &.ua-failed {
+      @include badge($error, white);
+    }
+  }
+}
+
+.ua-transactions-pagination {
+  @include flex(row, center, center);
+  gap: $space-4;
+  margin-top: $space-4;
+  
+  button {
+    @include button-secondary;
+    padding: $space-2 $space-3;
+    
+    &:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+  }
+  
+  span {
+    color: $neutral-600;
+    font-size: $font-size-sm;
+  }
+}
+
+// Settings Tab
+.ua-settings-content {
+  .ua-settings-section {
+    margin-bottom: $space-8;
+    padding-bottom: $space-6;
+    border-bottom: 1px solid $neutral-200;
+    
+    &:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+    
+    h3 {
+      font-size: $font-size-lg;
+      font-weight: $font-weight-semibold;
+      color: $neutral-800;
+      margin-bottom: $space-4;
+    }
+  }
+  
+  .ua-form-group {
+    margin-bottom: $space-4;
+    
+    label {
+      display: block;
+      margin-bottom: $space-2;
+      font-weight: $font-weight-medium;
+      color: $neutral-700;
+    }
+    
+    input, textarea {
+      @include input;
+    }
+    
+    textarea {
+      resize: vertical;
+      min-height: 100px;
+    }
+  }
+  
+  .ua-save-btn {
+    @include button-primary;
+    min-width: 150px;
+  }
+  
+  // Payment Methods
+  .ua-payment-methods {
+    @include flex(column, flex-start, stretch);
+    gap: $space-3;
+  }
+  
+  .ua-payment-method-card {
+    @include flex(row, space-between, center);
+    background-color: $neutral-50;
+    border-radius: $radius-md;
+    padding: $space-3 $space-4;
+    
+    .ua-card-icon {
+      color: $primary-600;
+    }
+    
+    .ua-card-details {
+      flex: 1;
+      margin-left: $space-3;
+      
+      h4 {
+        font-weight: $font-weight-semibold;
+        color: $neutral-800;
+        margin-bottom: $space-1;
+      }
+      
+      p {
+        color: $neutral-600;
+        font-size: $font-size-sm;
+      }
+    }
+    
+    .ua-card-actions {
+      @include flex(row, flex-end, center);
+      gap: $space-2;
+      
+      .ua-default-btn {
+        @include badge($primary-100, $primary-800);
+        cursor: default;
+      }
+      
+      .ua-remove-btn {
+        color: $error;
+        background: none;
+        border: none;
+        font-size: $font-size-sm;
+        cursor: pointer;
+        
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
+  }
+  
+  .ua-add-payment-btn {
+    @include button-outline;
+    margin-top: $space-2;
+  }
+  
+  // Notification Settings
+  .ua-notification-settings {
+    @include flex(column, flex-start, stretch);
+    gap: $space-4;
+  }
+  
+  .ua-notification-option {
+    @include flex(row, space-between, center);
+    padding: $space-3;
+    background-color: $neutral-50;
+    border-radius: $radius-md;
+    
+    h4 {
+      font-weight: $font-weight-semibold;
+      color: $neutral-800;
+      margin-bottom: $space-1;
+    }
+    
+    p {
+      color: $neutral-600;
+      font-size: $font-size-sm;
+      max-width: 400px;
+    }
+  }
+  
+  // Toggle Switch
+  .ua-toggle-switch {
+    position: relative;
+    display: inline-block;
+    width: 50px;
+    height: 26px;
+    
+    input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+      
+      &:checked + .ua-toggle-slider {
+        background-color: $primary-500;
+        
+        &:before {
+          transform: translateX(24px);
+        }
+      }
+      
+      &:focus + .ua-toggle-slider {
+        box-shadow: 0 0 1px $primary-500;
+      }
+    }
+    
+    .ua-toggle-slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: $neutral-300;
+      transition: $transition-normal;
+      border-radius: $radius-full;
+      
+      &:before {
+        position: absolute;
+        content: "";
+        height: 20px;
+        width: 20px;
+        left: 3px;
+        bottom: 3px;
+        background-color: white;
+        transition: $transition-normal;
+        border-radius: 50%;
+      }
+    }
+  }
+  
+  // Danger Zone
+  .danger-zone {
+    .ua-change-password-btn {
+      @include button-secondary;
+      margin-right: $space-3;
+      margin-bottom: $space-3;
+    }
+    
+    .ua-delete-account-btn {
+      background-color: $error;
+      color: white;
+      border: none;
+      padding: $space-2 $space-4;
+      border-radius: $radius-md;
+      cursor: pointer;
+      transition: all $transition-normal;
+      font-weight: $font-weight-medium;
+      
+      &:hover {
+        background-color: darken($error, 10%);
+      }
+    }
+  }
+}
+
+// Responsive enhancements
+@include respond-to(lg) {
+  .ua-product-card {
+    .ua-product-actions {
+      @include flex(row, flex-start, center);
+      button {
+        flex: initial;
+        min-width: 120px;
+      }
+    }
+  }
+  
+  .ua-profile-header {
+    text-align: left;
+    @include flex(row, flex-start, flex-start);
+    flex-wrap: wrap;
+    
+    .ua-profile-avatar {
+      margin-right: $space-4;
+      margin-bottom: 0;
+    }
+    
+    .ua-profile-details {
+      flex: 1;
+    }
+    
+    .ua-profile-actions {
+      width: 100%;
+      margin-top: $space-4;
+      justify-content: flex-start;
+    }
+  }
+}
+
+@media (max-width: $breakpoint-sm) {
+  .ua-tab-btn {
+    font-size: $font-size-sm;
+    padding: $space-2 $space-1;
+    
+    svg {
+      font-size: $font-size-base;
+    }
+  }
+  
+  .ua-profile-actions {
+    flex-direction: column;
+    
+    .ua-edit-profile-btn,
+    .ua-logout-btn {
+      max-width: 100%;
+    }
+  }
+  
+  .ua-settings-content {
+    .ua-notification-option {
+      flex-direction: column;
+      align-items: flex-start;
+      
+      .ua-toggle-switch {
+        margin-top: $space-3;
+      }
+    }
+  }
+}
