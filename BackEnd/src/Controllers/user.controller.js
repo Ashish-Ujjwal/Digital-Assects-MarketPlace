@@ -234,45 +234,50 @@ const loginUser = asyncHandler(async (req, res) => {
 
 const logoutUser = asyncHandler(async (req, res) => {
     const token = req.cookies.refreshToken;
-  
+    console.log(`Token :`, token);
+
     if (!token) {
-      return res
-        .status(400)
-        .clearCookie("refreshToken")
-        .clearCookie("accessToken")
-        .json(new ApiResponse(400, null, "No refresh token provided"));
+        return res
+            .status(400)
+            .clearCookie("refreshToken", {
+                httpOnly: true,
+                sameSite: 'None',     // Required for cross-site cookies
+                secure: true,         // Required in production with HTTPS
+            })
+            .clearCookie("accessToken")
+            .json(new ApiResponse(400, null, "No refresh token provided"));
     }
-  
+
     try {
-      const decoded = jwt.verify(token, process.env.REFRESH_TOKEN);
-      const userId = decoded._id;
-  
-      // Remove refreshToken from DB
-      await User.findByIdAndUpdate(userId, {
-        $unset: { refreshToken: 1 },
-      });
-  
+        const decoded = jwt.verify(token, process.env.REFRESH_TOKEN);
+        const userId = decoded._id;
+
+        // Remove refreshToken from DB
+        await User.findByIdAndUpdate(userId, {
+            $unset: { refreshToken: 1 },
+        });
+
     } catch (err) {
-      console.warn("Invalid or expired refresh token during logout.");
-      // Continue anyway to clear cookies
+        console.warn("Invalid or expired refresh token during logout.");
+        // Continue anyway to clear cookies
     }
-  
+
     // Clear cookies regardless
     return res
-      .status(200)
-      .clearCookie("refreshToken", {
-        httpOnly: true,
-        secure: true,
-        sameSite: "strict",
-      })
-      .clearCookie("accessToken", {
-        httpOnly: true,
-        secure: true,
-        sameSite: "strict",
-      })
-      .json(new ApiResponse(200, null, "Logged out successfully"));
-  });
-  
+        .status(200)
+        .clearCookie("refreshToken", {
+            httpOnly: true,
+            secure: true,
+            sameSite: "strict",
+        })
+        .clearCookie("accessToken", {
+            httpOnly: true,
+            secure: true,
+            sameSite: "strict",
+        })
+        .json(new ApiResponse(200, null, "Logged out successfully"));
+});
+
 
 // Update User Controller
 const updateUser = asyncHandler(async (req, res) => {
@@ -330,10 +335,10 @@ const refreshAccessToken = asyncHandler(async (req, res) => {
     if (!incomingRefreshToken) {
         // console.log("object");
         return res.status(500).json({
-          error: "No refresh token provided",
-          action: "CLEAR_STORAGE",
+            error: "No refresh token provided",
+            action: "CLEAR_STORAGE",
         });
-      }
+    }
 
     try {
         const decodedToken = jwt.verify(incomingRefreshToken, process.env.REFRESH_TOKEN);
