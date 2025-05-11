@@ -1,6 +1,6 @@
-import { asyncHandler } from "../utils/asyncHandler.js"
+import { asyncHandler } from "../Utils/asyncHandler.js"
 import { ApiError } from "../Utils/apiError.js"
-import { ApiResponse } from "../utils/apiResponse.js"
+import { ApiResponse } from "../Utils/apiResponse.js"
 import { User } from '../Models/user.model.js';
 import { generateToken, isTokenValid } from '../services/tokenServices.js';
 import { sendVerificationEmail } from '../services/emailServices.js';

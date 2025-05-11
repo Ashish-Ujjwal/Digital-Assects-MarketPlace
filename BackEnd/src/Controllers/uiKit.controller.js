@@ -1,4 +1,4 @@
-import UiKit from '../models/uiKit.model.js';
+import UiKit from '../Models/uiKit.model.js';
 
 // GET all UI Kits
 export const getAllUiKits = async (req, res) => {
