@@ -11,7 +11,7 @@ const app = express();
 
 // CORS (Cross-Origin Resource Sharing)
 app.use(cors({
-    origin: process.env.CORS_ORIGIN || "http://localhost:3000",  // e.g., 'http://localhost:3000' or 'https://myfrontend.com'
+    origin: process.env.CORS_ORIGIN,  // e.g., 'http://localhost:3000' or 'https://myfrontend.com'
     allowedHeaders: ['Content-Type','Origin', 'Authorization'], // Allowed headers
     credentials: true,
     methods: ['GET', 'PUT', 'POST', 'DELETE', 'OPTIONS'],
