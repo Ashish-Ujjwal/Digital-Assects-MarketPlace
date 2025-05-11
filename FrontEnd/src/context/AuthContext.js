@@ -115,18 +115,18 @@ export const AuthProvider = ({ children }) => {
     try {
       setError(null);
       setLoading(true);
-  
+
       const response = await apiClient.post(
         '/users/update-account',
         updatedData,
       );
-  
+
       const updatedUser = response.data.user;
-  
+
       // Update local storage and context
       localStorage.setItem('user', JSON.stringify(updatedUser));
       setCurrentUser(updatedUser);
-  
+
       return updatedUser;
     } catch (err) {
       const message = err.response?.data?.message || 'Update failed';
@@ -136,23 +136,25 @@ export const AuthProvider = ({ children }) => {
       setLoading(false);
     }
   };
-  
+
 
   // Logout function
-  const logout = async() => {
+  const logout = async () => {
     try {
       // Call backend logout API
       await apiClient.post('/users/logout', {}, {
         withCredentials: true // Send cookies (refreshToken)
       });
-  
+
       // Remove all user data from localStorage
       localStorage.clear(); // optional, if no other app data is stored
-  
+
       // Clear auth context
       setCurrentUser(null);
 
     } catch (error) {
+      // Force refresh to recover from potential CORS/session errors
+      window.location.reload();
       console.error("Logout failed:", error);
     }
   };
