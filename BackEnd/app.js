@@ -24,7 +24,7 @@ app.use(cookieParser());
 app.use(express.json());
 
 // routes import
-import userRouter from './src/routes/user.route.js'
+import userRouter from './src/Routes/user.route.js'
 import uiKitRouter from './src/Routes/uiKit.route.js'
 
 // Routes
