@@ -318,78 +318,60 @@ const updateUser = asyncHandler(async (req, res) => {
 
 
 const refreshAccessToken = asyncHandler(async (req, res) => {
-    // Implementing refresh token logic here...
-    // 1. Validate the refresh token in the request cookies or body.
-    // 2. If the refresh token is invalid, return an error.
-    // 3. If the refresh token is valid, generate a new access token and refresh token.
-    // 4. Set the new access token and refresh token in the response cookies.
-    // 5. Return the user object as a response and send cookies.
-    // 6. Remove the old refresh token from the database.
-
-    // return res.status(200).json({
-    //     message: "ok"
-    // })
-    // console.log("object");
     const incomingRefreshToken = req.cookies.refreshToken || req.body.refreshToken;
-    // console.log(`icr`,incomingRefreshToken);
+  
     if (!incomingRefreshToken) {
-        // console.log("object");
-        return res.status(500).json({
-            error: "No refresh token provided",
-            action: "CLEAR_STORAGE",
-        });
+      return res.status(401).json({
+        error: "No refresh token provided",
+        action: "CLEAR_STORAGE",
+      });
     }
-
+  
     try {
-        const decodedToken = jwt.verify(incomingRefreshToken, process.env.REFRESH_TOKEN);
-        // console.log(decodedToken);
-        const user = await User.findById(decodedToken?._id).select(
-            "-password"
-        );
-        // console.log(user);
-        if (!user) {
-            throw new ApiError('Invalid refresh token', 401);
-        }
-
-        if (incomingRefreshToken !== user?.refreshToken) {
-            throw new ApiError('RefreshToken is expired or used', 401);
-        }
-
-        const options = {
-            httpOnly: true,
-            secure: true
-        }
-
-        const accessToken = await generateOnlyAccessToken(user?._id);
-        // console.log('NewAccessToken : ', accessToken);
-
-        return res
-            .status(200)
-            .cookie("accessToken", accessToken, options)
-            // .cookie("refreshToken", refreshToken, options)
-            .json(new ApiResponse(200, "Refreshed Access Token", {
-                user: user,
-                accessToken: accessToken
-            }));
-
+      const decodedToken = jwt.verify(incomingRefreshToken, process.env.REFRESH_TOKEN);
+      const user = await User.findById(decodedToken?._id).select("-password");
+  
+      if (!user || incomingRefreshToken !== user?.refreshToken) {
+        throw new ApiError('Invalid or expired refresh token', 401);
+      }
+  
+      const accessToken = await generateOnlyAccessToken(user._id);
+  
+      const cookieOptions = {
+        httpOnly: true,
+        secure: true,           // Required for HTTPS (like Vercel)
+        sameSite: 'None',       // Required for cross-origin cookies
+        // maxAge: 7 * 24 * 60 * 60 * 1000, // Optional: 7 days
+      };
+  
+      return res
+        .status(200)
+        .cookie("accessToken", accessToken, cookieOptions)
+        .json(new ApiResponse(200, "Refreshed Access Token", {
+          user,
+          accessToken
+        }));
+  
     } catch (error) {
-        const options = {
-            httpOnly: true,
-            secure: true
-        }
-        console.log("Invalid Refresh Token : ", error);
-        res
-            .status(401)
-            .clearCookie("accessToken", options)
-            .clearCookie("refreshToken", options)
-            .json({
-                error: "Refresh Token Expired",
-                message: "Please login again",
-                statusCode: 401,
-                action: "CLEAR_STORAGE", // Signal to the client to clear local storage
-            });
-        // throw new ApiError(error?.message || "Invalid refresh token", 401);
-    }
+      const cookieOptions = {
+        httpOnly: true,
+        secure: true,
+        sameSite: 'None',
+      };
+  
+      console.error("Invalid Refresh Token: ", error);
+  
+      return res
+        .status(401)
+        .clearCookie("accessToken", cookieOptions)
+        .clearCookie("refreshToken", cookieOptions)
+        .json({
+          error: "Refresh token expired or invalid",
+          message: "Please login again",
+          statusCode: 401,
+          action: "CLEAR_STORAGE",
+        });
+    }  
 });
 
 const getCurrentUser = asyncHandler(async (req, res) => {
